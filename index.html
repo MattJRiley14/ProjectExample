@@ -1,13 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Selecting all elements and removing any margin (AKA Space between elements) */
+    * {
+      margin: 0;
+    }
+
+    body {
+      /* Setting the position to relative so the #gate div will be absolutely positioned relative to the body element */
+      position: relative;
+      /* Setting the height so that it will take up the full screen height (VH is Viewport Height) because the body only takes up the necessary height needed to display the elements inside of it by default */
+      height: 100vh;
+
+      /* Using Flexbox to center the h1 element vertically and horizontally within the body element */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #gate {
+      background-color: black;
+      /* Positioning the #gate div relative to the body element (See above) */
+      position: absolute;
+      /* Setting the z-index to a number higher than zero (NOTE: Zero is the default z-index value for all elements) so that the #gate div will display on top of any parent or sibling elements on the page (AKA In the HTML file) */
+      z-index: 1;
+      /* Using top left to have the #gate div positioned starting in the very top left corner */
+      top: 0;
+      left: 0;
+      /* Setting the width and height to 100% so it take up the full space that the body element (AKA Parent element) takes up */
+      width: 100%;
+      height: 100%;
+      /* Using Flexbox to center the button vertically and horizontally within the #gate div */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      /* transition-property determines which CSS will be affected (In this case it will be the opacity style which determines how visible an element is) */
+      transition-property: opacity;
+      /* transition-duration determines the amount of time the transition takes to complete */
+      transition-duration: 3s;
+    }
+
+    button {
+      color: white;
+      background-color: blue;
+      font-size: 50px;
+    }
+  </style>
   <title>Document</title>
 </head>
+
 <body>
-  <h1>This is my Capstone Project</h1>
-  <p>Hello</p>
+  <h1>WELCOME TO CAPSTONE PROJECT LAND</h1>
+
+  <div id="gate">
+    <button>OPEN THE GATES</button>
+  </div>
+
+
+  <script>
+    // Selecting the div and button elements
+    const button = document.querySelector(`button`);
+    const gate = document.querySelector(`#gate`);
+
+    // Code in the anonymous arrow function will run when the button is clicked
+    button.addEventListener(`click`, () => {
+
+      // Button is removed as soon as the button is clicked
+      button.remove();
+      
+      
+      // The opacity style (AKA CSS Property) for the #gate div is changed to zero over the span of 3 seconds (See transition-duration) above
+      // NOTE: The default/starting value for opacity is 1 (AKA Fully visible)
+      gate.style.opacity = 0;
+
+      // 3 seconds after the button is clicked the #gate div is removed from the page so it does interfere with anything
+      // NOTE: 3 seconds is the same amount of time as the transition duration above
+      setTimeout(() => {
+        gate.remove();        
+      }, 3000);
+    });
+  </script>
 </body>
+
 </html>
